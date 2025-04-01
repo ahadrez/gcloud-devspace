@@ -15,12 +15,8 @@ components:
           value: /home/tooling/.terraformrc
 commands:
   - id: init-project
-    exec:
+    apply:
       component: tools
-      commandLine: "echo Initializing project..."
-      workingDir: ${PROJECTS_ROOT}
-      group:
-        kind: build
   - id: set-ca-files
     exec:
       component: tools
@@ -31,10 +27,12 @@ commands:
   - id: configure-gcloud
     exec:
       component: tools
-      commandLine: "gcloud auth login --no-launch-browser --update-adc"
       workingDir: ${PROJECTS_ROOT}
+      commandLine: "gcloud auth login --no-launch-browser --update-adc"
       group:
         kind: run
 events:
   preStart:
     - init-project
+    - set-ca-files
+    - configure-gcloud
