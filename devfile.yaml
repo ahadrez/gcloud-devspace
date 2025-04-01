@@ -15,8 +15,12 @@ components:
           value: /home/tooling/.terraformrc
 commands:
   - id: init-project
-    apply:
+    exec:
       component: base
+      commandLine: "echo Initializing project..."
+      workingDir: ${PROJECTS_ROOT}
+      group:
+        kind: build
   - id: set-ca-files
     exec:
       component: base
