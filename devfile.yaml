@@ -1,0 +1,43 @@
+schemaVersion: 2.2.2
+metadata:
+  name: tf-devspace-dev
+components:
+  - name: base
+    container:
+      image: quay.io/upstream/devspaces:0.0.1
+      memoryLimit: '4Gi'
+      memoryRequest: '2Gi'
+      cpuLimit: '4'
+      cpuRequest: '1'
+      mountSources: true
+      env:
+        - name: TF_CLI_CONFIG_FILE
+          value: /home/tooling/.terraformrc
+commands:
+  - id: init-project
+    apply:
+      component: tools
+  - id: set-ca-files
+    exec:
+      component: tools
+      commandLine: "gcloud config set core/custom_ca_certs_file /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt"
+      workingDir: ${PROJECTS_ROOT}
+      group:
+        kind: run
+  - id: configure-gcloud
+    exec:
+      component: tools
+      workingDir: ${PROJECTS_ROOT}
+      commandLine: "gcloud auth login --no-launch-browser --update-adc"
+      group:
+        kind: run
+  - id: pre-compile-cmd
+    composite:
+      commands:
+        - configure-gcloud
+        - set-ca-files
+events:
+  preStart:
+    - init-project
+  postStart:
+    - pre-compile-cmd
