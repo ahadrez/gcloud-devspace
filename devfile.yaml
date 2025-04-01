@@ -34,6 +34,3 @@ commands:
 events:
   preStart:
     - init-project
-  postStart:
-    - configure-gcloud
-    - set-ca-files
