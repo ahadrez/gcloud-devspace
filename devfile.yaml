@@ -27,15 +27,10 @@ commands:
   - id: configure-gcloud
     exec:
       component: tools
-      workingDir: ${PROJECTS_ROOT}
       commandLine: "gcloud auth login --no-launch-browser --update-adc"
+      workingDir: ${PROJECTS_ROOT}
       group:
         kind: run
-  - id: pre-compile-cmd
-    composite:
-      commands:
-        - configure-gcloud
-        - set-ca-files
 events:
   preStart:
     - init-project
