@@ -16,17 +16,17 @@ components:
 commands:
   - id: init-project
     apply:
-      component: tools
+      component: base
   - id: set-ca-files
     exec:
-      component: tools
+      component: base
       commandLine: "gcloud config set core/custom_ca_certs_file /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt"
       workingDir: ${PROJECTS_ROOT}
       group:
         kind: run
   - id: configure-gcloud
     exec:
-      component: tools
+      component: base
       commandLine: "gcloud auth login --no-launch-browser --update-adc"
       workingDir: ${PROJECTS_ROOT}
       group:
