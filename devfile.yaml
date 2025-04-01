@@ -16,21 +16,21 @@ components:
 commands:
   - id: init-project
     exec:
-      component: base
+      component: tools
       commandLine: "echo Initializing project..."
       workingDir: ${PROJECTS_ROOT}
       group:
         kind: build
   - id: set-ca-files
     exec:
-      component: base
+      component: tools
       commandLine: "gcloud config set core/custom_ca_certs_file /etc/pki/ca-trust/extracted/openssl/ca-bundle.trust.crt"
       workingDir: ${PROJECTS_ROOT}
       group:
         kind: run
   - id: configure-gcloud
     exec:
-      component: base
+      component: tools
       commandLine: "gcloud auth login --no-launch-browser --update-adc"
       workingDir: ${PROJECTS_ROOT}
       group:
