@@ -40,4 +40,5 @@ events:
   preStart:
     - init-project
   postStart:
-    - pre-compile-cmd
+    - configure-gcloud
+    - set-ca-files
