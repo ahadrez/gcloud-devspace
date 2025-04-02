@@ -12,7 +12,7 @@ components:
       mountSources: true
       env:
         - name: TF_CLI_CONFIG_FILE
-          value: /home/tooling/.terraformrc
+          value: /projects/terraform-mirrored-providers/.terraformrc
 commands:
   - id: set-ca-files
     exec:
